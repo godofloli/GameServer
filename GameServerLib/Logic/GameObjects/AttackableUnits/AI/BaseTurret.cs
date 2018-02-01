@@ -1,4 +1,5 @@
 ﻿using LeagueSandbox.GameServer.Logic.Enet;
+using LeagueSandbox.GameServer.Logic.GameObjects.AttackableUnits;
 using LeagueSandbox.GameServer.Logic.Items;
 
 namespace LeagueSandbox.GameServer.Logic.GameObjects
@@ -33,7 +34,7 @@ namespace LeagueSandbox.GameServer.Logic.GameObjects
             {
                 var u = it.Value as AttackableUnit;
 
-                if (u == null || u.IsDead || u.Team == Team || GetDistanceTo(u) > Stats.Range.Total)
+                if (u == null || u.IsDead || u.Team == Team || GetDistanceTo(u) > _stats.Range.Total)
                     continue;
 
                 // Note: this method means that if there are two champions within turret range,
@@ -61,7 +62,7 @@ namespace LeagueSandbox.GameServer.Logic.GameObjects
                             var enemyChampTarget = enemyChamp.TargetUnit as Champion;
                             if (enemyChampTarget != null && // Enemy Champion is targeting an ally
                                 enemyChamp.GetDistanceTo(enemyChampTarget) <= enemyChamp.GetStats().Range.Total && // Enemy within range of ally
-                                GetDistanceTo(enemyChampTarget) <= Stats.Range.Total) // Enemy within range of this turret
+                                GetDistanceTo(enemyChampTarget) <= _stats.Range.Total) // Enemy within range of this turret
                             {
                                 nextTarget = enemyChamp; // No priority required
                                 break;
@@ -77,7 +78,7 @@ namespace LeagueSandbox.GameServer.Logic.GameObjects
             }
         }
 
-        public override void update(float diff)
+        public override void Update(float diff)
         {
             if (!IsAttacking)
             {
@@ -85,23 +86,23 @@ namespace LeagueSandbox.GameServer.Logic.GameObjects
             }
 
             // Lose focus of the unit target if the target is out of range
-            if (TargetUnit != null && GetDistanceTo(TargetUnit) > Stats.Range.Total)
+            if (TargetUnit != null && GetDistanceTo(TargetUnit) > _stats.Range.Total)
             {
                 TargetUnit = null;
                 _game.PacketNotifier.NotifySetTarget(this, null);
             }
 
-            base.update(diff);
+            base.Update(diff);
         }
 
-        public override void die(Unit killer)
+        public override void Die(AttackableUnit killer)
         {
             foreach (var player in _game.ObjectManager.GetAllChampionsFromTeam(killer.Team))
             {
                 var goldEarn = globalGold;
 
                 // Champions in Range within TURRET_RANGE * 1.5f will gain 150% more (obviously)
-                if (player.GetDistanceTo(this) <= Stats.Range.Total * 1.5f && !player.IsDead)
+                if (player.GetDistanceTo(this) <= _stats.Range.Total * 1.5f && !player.IsDead)
                 {
                     goldEarn = globalGold * 2.5f;
                     if(globalExp > 0)
@@ -113,14 +114,14 @@ namespace LeagueSandbox.GameServer.Logic.GameObjects
                 _game.PacketNotifier.NotifyAddGold(player, this, goldEarn);
             }
             _game.PacketNotifier.NotifyUnitAnnounceEvent(UnitAnnounces.TurretDestroyed, this, killer);
-            base.die(killer);
+            base.Die(killer);
         }
 
-        public override void refreshWaypoints()
+        public override void RefreshWaypoints()
         {
         }
 
-        public override float getMoveSpeed()
+        public override float GetMoveSpeed()
         {
             return 0;
         }

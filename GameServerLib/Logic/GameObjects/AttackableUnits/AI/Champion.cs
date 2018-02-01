@@ -7,6 +7,7 @@ using LeagueSandbox.GameServer.Logic.Enet;
 using Newtonsoft.Json.Linq;
 using LeagueSandbox.GameServer.Logic.Scripting;
 using LeagueSandbox.GameServer.Logic.API;
+using LeagueSandbox.GameServer.Logic.GameObjects.AttackableUnits;
 
 namespace LeagueSandbox.GameServer.Logic.GameObjects
 {
@@ -47,9 +48,9 @@ namespace LeagueSandbox.GameServer.Logic.GameObjects
             Inventory = InventoryManager.CreateInventory(this);
             Shop = Shop.CreateShop(this);
 
-            Stats.Gold = 475.0f;
-            Stats.GoldPerSecond.BaseValue = _game.Map.MapGameScript.GoldPerSecond;
-            Stats.SetGeneratingGold(false);
+            _stats.Gold = 475.0f;
+            _stats.GoldPerSecond.BaseValue = _game.Map.MapGameScript.GoldPerSecond;
+            _stats.SetGeneratingGold(false);
 
             //TODO: automaticaly rise spell levels with CharData.SpellLevelsUp
             for(short i = 0; i<CharData.SpellNames.Length;i++)
@@ -135,17 +136,17 @@ namespace LeagueSandbox.GameServer.Logic.GameObjects
 
         public void AddStatModifier(ChampionStatModifier statModifier)
         {
-            Stats.AddModifier(statModifier);
+            _stats.AddModifier(statModifier);
         }
 
         public void UpdateStatModifier(ChampionStatModifier statModifier)
         {
-            Stats.UpdateModifier(statModifier);
+            _stats.UpdateModifier(statModifier);
         }
 
         public void RemoveStatModifier(ChampionStatModifier statModifier)
         {
-            Stats.RemoveModifier(statModifier);
+            _stats.RemoveModifier(statModifier);
         }
         public bool CanMove()
         {
@@ -236,16 +237,16 @@ namespace LeagueSandbox.GameServer.Logic.GameObjects
             return s;
         }
 
-        public override void update(float diff)
+        public override void Update(float diff)
         {
-            base.update(diff);
+            base.Update(diff);
 
             if (!IsDead && MoveOrder == MoveOrder.MOVE_ORDER_ATTACKMOVE && TargetUnit != null)
             {
                 var objects = _game.ObjectManager.GetObjects();
                 var distanceToTarget = 9000000.0f;
                 AttackableUnit nextTarget = null;
-                var range = Math.Max(Stats.Range.Total, DETECT_RANGE);
+                var range = Math.Max(_stats.Range.Total, DETECT_RANGE);
 
                 foreach (var it in objects)
                 {
@@ -268,9 +269,9 @@ namespace LeagueSandbox.GameServer.Logic.GameObjects
                 }
             }
 
-            if (!Stats.IsGeneratingGold() && _game.GameTime >= _game.Map.MapGameScript.FirstGoldTime)
+            if (!_stats.IsGeneratingGold() && _game.GameTime >= _game.Map.MapGameScript.FirstGoldTime)
             {
-                Stats.SetGeneratingGold(true);
+                _stats.SetGeneratingGold(true);
                 _logger.LogCoreInfo("Generating Gold!");
             }
 
@@ -351,7 +352,7 @@ namespace LeagueSandbox.GameServer.Logic.GameObjects
             return hash;
         }
 
-        public override bool isInDistress()
+        public override bool IsInDistress()
         {
             return DistressCause != null;
         }
@@ -384,7 +385,7 @@ namespace LeagueSandbox.GameServer.Logic.GameObjects
             return Inventory;
         }
 
-        public override void die(Unit killer)
+        public override void Die(AttackableUnit killer)
         {
             RespawnTimer = 5000 + GetStats().Level * 2500;
             _game.ObjectManager.StopTargeting(this);
@@ -456,9 +457,9 @@ namespace LeagueSandbox.GameServer.Logic.GameObjects
             _game.ObjectManager.StopTargeting(this);
         }
 
-        public override void onCollision(GameObject collider)
+        public override void OnCollision(GameObject collider)
         {
-            base.onCollision(collider);
+            base.OnCollision(collider);
             if (collider == null)
             {
                 //CORE_INFO("I bumped into a wall!");
@@ -469,7 +470,7 @@ namespace LeagueSandbox.GameServer.Logic.GameObjects
             }
         }
 
-        public override void TakeDamage(Unit attacker, float damage, DamageType type, DamageSource source, bool isCrit)
+        public override void TakeDamage(AttackableUnit attacker, float damage, DamageType type, DamageSource source, bool isCrit)
         {
             base.TakeDamage(attacker, damage, type, source, isCrit);
 

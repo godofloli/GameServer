@@ -1,5 +1,6 @@
 ﻿using LeagueSandbox.GameServer.Logic.Enet;
 using System.Collections.Generic;
+using LeagueSandbox.GameServer.Logic.GameObjects.AttackableUnits;
 
 namespace LeagueSandbox.GameServer.Logic.GameObjects
 {
@@ -69,13 +70,13 @@ namespace LeagueSandbox.GameServer.Logic.GameObjects
                 case TurretType.InnerTurret:
                     globalGold = 100;
 
-                    Stats.CurrentHealth = 1300;
-                    Stats.HealthPoints.BaseValue = 1300;
-                    Stats.Range.BaseValue = 905.0f;
-                    Stats.AttackSpeedFlat = 0.83f;
-                    Stats.Armor.BaseValue = 60.0f;
-                    Stats.MagicResist.BaseValue = 100.0f;
-                    Stats.AttackDamage.BaseValue = 170.0f;
+                    _stats.CurrentHealth = 1300;
+                    _stats.HealthPoints.BaseValue = 1300;
+                    _stats.Range.BaseValue = 905.0f;
+                    _stats.AttackSpeedFlat = 0.83f;
+                    _stats.Armor.BaseValue = 60.0f;
+                    _stats.MagicResist.BaseValue = 100.0f;
+                    _stats.AttackDamage.BaseValue = 170.0f;
 
                     AutoAttackDelay = 4.95f / 30.0f;
                     AutoAttackProjectileSpeed = 1200.0f;
@@ -83,14 +84,14 @@ namespace LeagueSandbox.GameServer.Logic.GameObjects
                 case TurretType.OuterTurret:
                     globalGold = 125;
 
-                    Stats.CurrentHealth = 1300;
-                    Stats.HealthPoints.BaseValue = 1300;
-                    Stats.AttackDamage.BaseValue = 100;
-                    Stats.Range.BaseValue = 905.0f;
-                    Stats.AttackSpeedFlat = 0.83f;
-                    Stats.Armor.BaseValue = 60.0f;
-                    Stats.MagicResist.BaseValue = 100.0f;
-                    Stats.AttackDamage.BaseValue = 152.0f;
+                    _stats.CurrentHealth = 1300;
+                    _stats.HealthPoints.BaseValue = 1300;
+                    _stats.AttackDamage.BaseValue = 100;
+                    _stats.Range.BaseValue = 905.0f;
+                    _stats.AttackSpeedFlat = 0.83f;
+                    _stats.Armor.BaseValue = 60.0f;
+                    _stats.MagicResist.BaseValue = 100.0f;
+                    _stats.AttackDamage.BaseValue = 152.0f;
 
                     AutoAttackDelay = 4.95f / 30.0f;
                     AutoAttackProjectileSpeed = 1200.0f;
@@ -99,15 +100,15 @@ namespace LeagueSandbox.GameServer.Logic.GameObjects
                     globalGold = 150;
                     globalExp = 500;
 
-                    Stats.CurrentHealth = 1300;
-                    Stats.HealthPoints.BaseValue = 1300;
-                    Stats.HealthRegeneration.BaseValue = 5;
-                    Stats.ArmorPenetration.PercentBonus = 0.825f;
-                    Stats.Range.BaseValue = 905.0f;
-                    Stats.AttackSpeedFlat = 0.83f;
-                    Stats.Armor.BaseValue = 67.0f;
-                    Stats.MagicResist.BaseValue = 100.0f;
-                    Stats.AttackDamage.BaseValue = 190.0f;
+                    _stats.CurrentHealth = 1300;
+                    _stats.HealthPoints.BaseValue = 1300;
+                    _stats.HealthRegeneration.BaseValue = 5;
+                    _stats.ArmorPenetration.PercentBonus = 0.825f;
+                    _stats.Range.BaseValue = 905.0f;
+                    _stats.AttackSpeedFlat = 0.83f;
+                    _stats.Armor.BaseValue = 67.0f;
+                    _stats.MagicResist.BaseValue = 100.0f;
+                    _stats.AttackDamage.BaseValue = 190.0f;
 
                     AutoAttackDelay = 4.95f / 30.0f;
                     AutoAttackProjectileSpeed = 1200.0f;
@@ -115,40 +116,40 @@ namespace LeagueSandbox.GameServer.Logic.GameObjects
                 case TurretType.NexusTurret:
                     globalGold = 50;
 
-                    Stats.CurrentHealth = 1300;
-                    Stats.HealthPoints.BaseValue = 1300;
-                    Stats.HealthRegeneration.BaseValue = 5;
-                    Stats.ArmorPenetration.PercentBonus = 0.825f;
-                    Stats.Range.BaseValue = 905.0f;
-                    Stats.AttackSpeedFlat = 0.83f;
-                    Stats.Armor.BaseValue = 65.0f;
-                    Stats.MagicResist.BaseValue = 100.0f;
-                    Stats.AttackDamage.BaseValue = 180.0f;
+                    _stats.CurrentHealth = 1300;
+                    _stats.HealthPoints.BaseValue = 1300;
+                    _stats.HealthRegeneration.BaseValue = 5;
+                    _stats.ArmorPenetration.PercentBonus = 0.825f;
+                    _stats.Range.BaseValue = 905.0f;
+                    _stats.AttackSpeedFlat = 0.83f;
+                    _stats.Armor.BaseValue = 65.0f;
+                    _stats.MagicResist.BaseValue = 100.0f;
+                    _stats.AttackDamage.BaseValue = 180.0f;
 
                     AutoAttackDelay = 4.95f / 30.0f;
                     AutoAttackProjectileSpeed = 1200.0f;
                     break;
                 case TurretType.FountainTurret:
-                    Stats.AttackSpeedFlat = 1.6f;
-                    Stats.GrowthAttackSpeed = 2.125f;
-                    Stats.CurrentHealth = 9999;
-                    Stats.HealthPoints.BaseValue = 9999;
+                    _stats.AttackSpeedFlat = 1.6f;
+                    _stats.GrowthAttackSpeed = 2.125f;
+                    _stats.CurrentHealth = 9999;
+                    _stats.HealthPoints.BaseValue = 9999;
                     globalExp = 400.0f;
-                    Stats.AttackDamage.BaseValue = 999.0f;
+                    _stats.AttackDamage.BaseValue = 999.0f;
                     globalGold = 100.0f;
-                    Stats.Range.BaseValue = 1250.0f;
+                    _stats.Range.BaseValue = 1250.0f;
                     AutoAttackDelay = 1.0f / 30.0f;
                     AutoAttackProjectileSpeed = 2000.0f;
                     break;
                 default:
 
-                    Stats.CurrentHealth = 2000;
-                    Stats.HealthPoints.BaseValue = 2000;
-                    Stats.AttackDamage.BaseValue = 100;
-                    Stats.Range.BaseValue = 905.0f;
-                    Stats.AttackSpeedFlat = 0.83f;
-                    Stats.Armor.PercentBonus = 0.5f;
-                    Stats.MagicResist.PercentBonus = 0.5f;
+                    _stats.CurrentHealth = 2000;
+                    _stats.HealthPoints.BaseValue = 2000;
+                    _stats.AttackDamage.BaseValue = 100;
+                    _stats.Range.BaseValue = 905.0f;
+                    _stats.AttackSpeedFlat = 0.83f;
+                    _stats.Armor.PercentBonus = 0.5f;
+                    _stats.MagicResist.PercentBonus = 0.5f;
 
                     AutoAttackDelay = 4.95f / 30.0f;
                     AutoAttackProjectileSpeed = 1200.0f;
@@ -157,7 +158,7 @@ namespace LeagueSandbox.GameServer.Logic.GameObjects
             }
         }
 
-        public override void update(float diff)
+        public override void Update(float diff)
         {
             //Update Stats if it's time
             switch (Type)
@@ -165,120 +166,120 @@ namespace LeagueSandbox.GameServer.Logic.GameObjects
                 case TurretType.OuterTurret:
                     if (!_turretHPUpdated)
                     {
-                        Stats.CurrentHealth = 1300 + GetEnemyChampionsCount() * 250;
-                        Stats.HealthPoints.BaseValue = 1300 + GetEnemyChampionsCount() * 250;
+                        _stats.CurrentHealth = 1300 + GetEnemyChampionsCount() * 250;
+                        _stats.HealthPoints.BaseValue = 1300 + GetEnemyChampionsCount() * 250;
                     }
 
                     if (_game.GameTime > 40000 - (GetEnemyChampionsCount() * 2000) &&
                         _game.GameTime < 400000 - (GetEnemyChampionsCount() * 2000))
                     {
-                        Stats.MagicResist.BaseValue = 100.0f + ((_game.GameTime - 30000) / 60000);
-                        Stats.AttackDamage.BaseValue = 152.0f + ((_game.GameTime - 30000) / 60000) * 4;
+                        _stats.MagicResist.BaseValue = 100.0f + ((_game.GameTime - 30000) / 60000);
+                        _stats.AttackDamage.BaseValue = 152.0f + ((_game.GameTime - 30000) / 60000) * 4;
                     }
                     else if (_game.GameTime < 30000)
                     {
-                        Stats.MagicResist.BaseValue = 100.0f;
-                        Stats.AttackDamage.BaseValue = 152.0f;
+                        _stats.MagicResist.BaseValue = 100.0f;
+                        _stats.AttackDamage.BaseValue = 152.0f;
                     }
                     else
                     {
-                        Stats.MagicResist.BaseValue = 107.0f;
-                        Stats.AttackDamage.BaseValue = 180.0f;
+                        _stats.MagicResist.BaseValue = 107.0f;
+                        _stats.AttackDamage.BaseValue = 180.0f;
                     }
                     break;
                 case TurretType.InnerTurret:
                     if (!_turretHPUpdated)
                     {
-                        Stats.CurrentHealth = 1300.0f + GetEnemyChampionsCount() * 250.0f;
-                        Stats.HealthPoints.BaseValue = 1300.0f + GetEnemyChampionsCount() * 250.0f;
+                        _stats.CurrentHealth = 1300.0f + GetEnemyChampionsCount() * 250.0f;
+                        _stats.HealthPoints.BaseValue = 1300.0f + GetEnemyChampionsCount() * 250.0f;
                     }
                     if (_game.GameTime > 480000 && _game.GameTime < 1620000)
                     {
-                        Stats.Armor.BaseValue = 60.0f + ((_game.GameTime - 480000) / 60000);
-                        Stats.MagicResist.BaseValue = 100.0f + ((_game.GameTime - 480000) / 60000);
-                        Stats.AttackDamage.BaseValue = 170.0f + ((_game.GameTime - 480000) / 60000) * 4;
+                        _stats.Armor.BaseValue = 60.0f + ((_game.GameTime - 480000) / 60000);
+                        _stats.MagicResist.BaseValue = 100.0f + ((_game.GameTime - 480000) / 60000);
+                        _stats.AttackDamage.BaseValue = 170.0f + ((_game.GameTime - 480000) / 60000) * 4;
                     }
                     else if (_game.GameTime < 480000)
                     {
-                        Stats.Armor.BaseValue = 60.0f;
-                        Stats.MagicResist.BaseValue = 100.0f;
-                        Stats.AttackDamage.BaseValue = 170.0f;
+                        _stats.Armor.BaseValue = 60.0f;
+                        _stats.MagicResist.BaseValue = 100.0f;
+                        _stats.AttackDamage.BaseValue = 170.0f;
                     }
                     else
                     {
-                        Stats.Armor.BaseValue = 80.0f;
-                        Stats.MagicResist.BaseValue = 120.0f;
-                        Stats.AttackDamage.BaseValue = 250.0f;
+                        _stats.Armor.BaseValue = 80.0f;
+                        _stats.MagicResist.BaseValue = 120.0f;
+                        _stats.AttackDamage.BaseValue = 250.0f;
                     }
                     break;
                 case TurretType.InhibitorTurret:
                     if (!_turretHPUpdated)
                     {
-                        Stats.CurrentHealth = 1300 + GetEnemyChampionsCount() * 250;
-                        Stats.HealthPoints.BaseValue = 1300 + GetEnemyChampionsCount() * 250;
+                        _stats.CurrentHealth = 1300 + GetEnemyChampionsCount() * 250;
+                        _stats.HealthPoints.BaseValue = 1300 + GetEnemyChampionsCount() * 250;
                     }
 
                     if (_game.GameTime > 480000 && _game.GameTime < 2220000)
                     {
-                        Stats.Armor.BaseValue = 67.0f + ((_game.GameTime - 480000) / 60000);
-                        Stats.MagicResist.BaseValue = 100.0f + ((_game.GameTime - 480000) / 60000);
-                        Stats.AttackDamage.BaseValue = 190.0f + ((_game.GameTime - 480000) / 60000) * 4;
+                        _stats.Armor.BaseValue = 67.0f + ((_game.GameTime - 480000) / 60000);
+                        _stats.MagicResist.BaseValue = 100.0f + ((_game.GameTime - 480000) / 60000);
+                        _stats.AttackDamage.BaseValue = 190.0f + ((_game.GameTime - 480000) / 60000) * 4;
                     }
                     else if (_game.GameTime < 480000)
                     {
-                        Stats.Armor.BaseValue = 67.0f;
-                        Stats.MagicResist.BaseValue = 100.0f;
-                        Stats.AttackDamage.BaseValue = 190.0f;
+                        _stats.Armor.BaseValue = 67.0f;
+                        _stats.MagicResist.BaseValue = 100.0f;
+                        _stats.AttackDamage.BaseValue = 190.0f;
                     }
                     else
                     {
-                        Stats.Armor.BaseValue = 97.0f;
-                        Stats.MagicResist.BaseValue = 130.0f;
-                        Stats.AttackDamage.BaseValue = 250.0f;
+                        _stats.Armor.BaseValue = 97.0f;
+                        _stats.MagicResist.BaseValue = 130.0f;
+                        _stats.AttackDamage.BaseValue = 250.0f;
                     }
                     break;
                 case TurretType.NexusTurret:
                     if (!_turretHPUpdated)
                     {
-                        Stats.CurrentHealth = 1300 + GetEnemyChampionsCount() * 125;
-                        Stats.HealthPoints.BaseValue = 1300 + GetEnemyChampionsCount() * 125;
+                        _stats.CurrentHealth = 1300 + GetEnemyChampionsCount() * 125;
+                        _stats.HealthPoints.BaseValue = 1300 + GetEnemyChampionsCount() * 125;
                     }
 
                     if (_game.GameTime < 1)
                     {
-                        Stats.Armor.BaseValue = 65.0f;
-                        Stats.MagicResist.BaseValue = 100.0f;
-                        Stats.AttackDamage.BaseValue = 180.0f;
+                        _stats.Armor.BaseValue = 65.0f;
+                        _stats.MagicResist.BaseValue = 100.0f;
+                        _stats.AttackDamage.BaseValue = 180.0f;
                     }
                     else if (_game.GameTime > 480000 && _game.GameTime < 2220000)
                     {
-                        Stats.Armor.BaseValue = 65.0f + ((_game.GameTime - 480000) / 60000);
-                        Stats.MagicResist.BaseValue = 100.0f + ((_game.GameTime - 480000) / 60000);
-                        Stats.AttackDamage.BaseValue = 180.0f + ((_game.GameTime - 480000) / 60000) * 4;
+                        _stats.Armor.BaseValue = 65.0f + ((_game.GameTime - 480000) / 60000);
+                        _stats.MagicResist.BaseValue = 100.0f + ((_game.GameTime - 480000) / 60000);
+                        _stats.AttackDamage.BaseValue = 180.0f + ((_game.GameTime - 480000) / 60000) * 4;
                     }
                     else if (_game.GameTime < 480000)
                     {
-                        Stats.Armor.BaseValue = 65.0f;
-                        Stats.MagicResist.BaseValue = 100.0f;
-                        Stats.AttackDamage.BaseValue = 180.0f;
+                        _stats.Armor.BaseValue = 65.0f;
+                        _stats.MagicResist.BaseValue = 100.0f;
+                        _stats.AttackDamage.BaseValue = 180.0f;
                     }
                     else
                     {
-                        Stats.Armor.BaseValue = 95.0f;
-                        Stats.MagicResist.BaseValue = 130.0f;
-                        Stats.AttackDamage.BaseValue = 300.0f;
+                        _stats.Armor.BaseValue = 95.0f;
+                        _stats.MagicResist.BaseValue = 130.0f;
+                        _stats.AttackDamage.BaseValue = 300.0f;
                     }
                     break;
             }
             _turretHPUpdated = true;
-            base.update(diff);
+            base.Update(diff);
         }
 
-        public override void refreshWaypoints()
+        public override void RefreshWaypoints()
         {
         }
 
-        public override float getMoveSpeed()
+        public override float GetMoveSpeed()
         {
             return 0;
         }

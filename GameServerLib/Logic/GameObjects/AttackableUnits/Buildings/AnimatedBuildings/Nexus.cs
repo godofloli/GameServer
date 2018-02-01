@@ -1,4 +1,5 @@
 ﻿using LeagueSandbox.GameServer.Logic.Enet;
+using LeagueSandbox.GameServer.Logic.GameObjects.AttackableUnits;
 
 namespace LeagueSandbox.GameServer.Logic.GameObjects
 {
@@ -14,19 +15,19 @@ namespace LeagueSandbox.GameServer.Logic.GameObjects
             uint netId = 0
         ) : base(model, new BuildingStats(), collisionRadius, x, y, visionRadius, netId)
         {
-            Stats.CurrentHealth = 5500;
-            Stats.HealthPoints.BaseValue = 5500;
+            _stats.CurrentHealth = 5500;
+            _stats.HealthPoints.BaseValue = 5500;
 
             SetTeam(team);
         }
 
-        public override void die(Unit killer)
+        public override void Die(AttackableUnit killer)
         {
             _game.Stop();
             _game.PacketNotifier.NotifyGameEnd(this);
         }
 
-        public override void refreshWaypoints()
+        public override void RefreshWaypoints()
         {
 
         }
@@ -36,7 +37,7 @@ namespace LeagueSandbox.GameServer.Logic.GameObjects
 
         }
 
-        public override float getMoveSpeed()
+        public override float GetMoveSpeed()
         {
             return 0;
         }

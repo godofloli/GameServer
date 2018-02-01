@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Numerics;
+using LeagueSandbox.GameServer.Logic.GameObjects.AttackableUnits;
 
 namespace LeagueSandbox.GameServer.Logic.GameObjects
 {
@@ -94,9 +95,9 @@ namespace LeagueSandbox.GameServer.Logic.GameObjects
             base.OnAdded();
             _game.PacketNotifier.NotifyMinionSpawned(this, Team);
         }
-        public override void update(float diff)
+        public override void Update(float diff)
         {
-            base.update(diff);
+            base.Update(diff);
 
             if (!IsDead)
             {
@@ -116,17 +117,17 @@ namespace LeagueSandbox.GameServer.Logic.GameObjects
             }
         }
 
-        public override void onCollision(GameObject collider)
+        public override void OnCollision(GameObject collider)
         {
             if (collider == TargetUnit) // If we're colliding with the target, don't do anything.
             {
                 return;
             }
 
-            base.onCollision(collider);
+            base.OnCollision(collider);
         }
 
-        public override bool isInDistress()
+        public override bool IsInDistress()
         {
             return DistressCause != null;
         }
@@ -182,7 +183,7 @@ namespace LeagueSandbox.GameServer.Logic.GameObjects
         }
         protected void keepFocussingTarget()
         {
-            if (IsAttacking && (TargetUnit == null || GetDistanceTo(TargetUnit) > Stats.Range.Total))
+            if (IsAttacking && (TargetUnit == null || GetDistanceTo(TargetUnit) > _stats.Range.Total))
             // If target is dead or out of range
             {
                 _game.PacketNotifier.NotifyStopAutoAttack(this);

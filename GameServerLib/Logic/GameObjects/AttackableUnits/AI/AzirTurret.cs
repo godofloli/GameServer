@@ -1,14 +1,15 @@
 ﻿using LeagueSandbox.GameServer.Logic.Enet;
+using LeagueSandbox.GameServer.Logic.GameObjects.AttackableUnits;
 using Newtonsoft.Json.Linq;
 
 namespace LeagueSandbox.GameServer.Logic.GameObjects
 {
     public class AzirTurret : BaseTurret
     {
-        public Unit Owner { get; private set; }
+        public AttackableUnit Owner { get; private set; }
 
         public AzirTurret(
-            Unit owner,
+            AttackableUnit owner,
             string name,
             string model,
             float x = 0,
@@ -20,18 +21,18 @@ namespace LeagueSandbox.GameServer.Logic.GameObjects
             Owner = owner;
 
             SetTeam(team);
-            Stats.Range.BaseValue = 905.0f;
+            _stats.Range.BaseValue = 905.0f;
         }
         public override void OnAdded()
         {
             base.OnAdded();
             _game.PacketNotifier.NotifySpawn(this);
         }
-        public override void refreshWaypoints()
+        public override void RefreshWaypoints()
         {
         }
 
-        public override float getMoveSpeed()
+        public override float GetMoveSpeed()
         {
             return 0;
         }
