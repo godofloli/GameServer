@@ -204,7 +204,6 @@ namespace LeagueSandbox.GameServer.Logic.GameObjects
                     }
                     break;
             }
-            spellGameScript.OnUpdate(diff);
         }
 
         /// <summary>
